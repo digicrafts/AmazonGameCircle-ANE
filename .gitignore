@@ -1,0 +1,15 @@
+
+*.DS_Store
+*userdata
+*.p12
+package.sh
+lib/*
+local.properties
+build.config
+android/com2
+ios/build
+vendor/
+*.ipr
+*.iws
+*.iml
+
