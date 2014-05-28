@@ -117,7 +117,7 @@ Update Your Application Descriptor
 
 You'll need to be using the AIR 4.0 SDK or higher, include the extension in your Application Descriptor XML, and update the Android Manifest Additions with some settings.
 
-Add the following settings in <application> tag.
+Add the following settings in <application> tag. Remember to replace your "YOUR.APP.PACKAGE.ID".
 
 ```xml
   <activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface"
