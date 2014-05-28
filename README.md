@@ -52,63 +52,63 @@ In FlashDevelop:
 Import the library
 
 ```javascript
-import digicrafts.extensions.AmazonGameCircle;
-import digicrafts.extensions.events.AmazonGameCircleEvent;
+  import digicrafts.extensions.AmazonGameCircle;
+  import digicrafts.extensions.events.AmazonGameCircleEvent;
 ```
 
 Initialize.
 
 ```javascript
-AmazonGameCircle.getInstance().addEventListener(AmazonGameCircleEvent.SERVICE_READY, handleAmazonGameCircleEvent);
-AmazonGameCircle.getInstance().addEventListener(AmazonGameCircleEvent.SERVICE_NOT_READY, handleAmazonGameCircleEvent);
-AmazonGameCircle.initialize();
-
-private function handleAmazonGameCircleEvent(e:AmazonGameCircleEvent):void
-{
-    switch (e.type){
-        case AmazonGameCircleEvent.SERVICE_READY:
-            // Game circle ready           
-            break;
-        case AmazonGameCircleEvent.SERVICE_NOT_READY:
-            // Game circle not ready
-            break;
-    }
-}
+  AmazonGameCircle.getInstance().addEventListener(AmazonGameCircleEvent.SERVICE_READY, handleAmazonGameCircleEvent);
+  AmazonGameCircle.getInstance().addEventListener(AmazonGameCircleEvent.SERVICE_NOT_READY, handleAmazonGameCircleEvent);
+  AmazonGameCircle.initialize();
+  
+  private function handleAmazonGameCircleEvent(e:AmazonGameCircleEvent):void
+  {
+      switch (e.type){
+          case AmazonGameCircleEvent.SERVICE_READY:
+              // Game circle ready           
+              break;
+          case AmazonGameCircleEvent.SERVICE_NOT_READY:
+              // Game circle not ready
+              break;
+      }
+  }
 ```
 
 Submit Score. 
 
 ```javascript
-AmazonGameCircle.submitScore(leaderboard_id, value);
+  AmazonGameCircle.submitScore(leaderboard_id, value);
+    
+  private function handleAmazonGameCircleLeaderboardEvent(e:AmazonGameCircleEvent):void
+  {
+      switch (e.type){
+          case AmazonGameCircleEvent.SUBMIT_SCORE_COMPLETE:
   
-private function handleAmazonGameCircleLeaderboardEvent(e:AmazonGameCircleEvent):void
-{
-    switch (e.type){
-        case AmazonGameCircleEvent.SUBMIT_SCORE_COMPLETE:
-
-            break;
-        case AmazonGameCircleEvent.SUBMIT_SCORE_ERROR:
-            break;
-    }
-}  
+              break;
+          case AmazonGameCircleEvent.SUBMIT_SCORE_ERROR:
+              break;
+      }
+  }  
 ```
 
 Show leaderboard.
 
 ```javascript
-AmazonGameCircle.showLeaderboard(leaderboard_id);
+  AmazonGameCircle.showLeaderboard(leaderboard_id);
 ```
 
 Update Achievements.
 
 ```javascript
-AmazonGameCircle.updateAchievement(achievementId,progress);
+  AmazonGameCircle.updateAchievement(achievementId,progress);
 ```
 
 Show Achievements.
 
 ```javascript
-AmazonGameCircle.showAchievements();
+  AmazonGameCircle.showAchievements();
 ```
 
 ##Setup for Android
@@ -120,31 +120,31 @@ You'll need to be using the AIR 4.0 SDK or higher, include the extension in your
 Add the following settings in <application> tag.
 
 ```xml
-<activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface"
-    android:theme="@style/GCOverlay" android:hardwareAccelerated="false"></activity>
-<activity
-  android:name="com.amazon.identity.auth.device.authorization.AuthorizationActivity"
-  android:theme="@android:style/Theme.NoDisplay"
-  android:allowTaskReparenting="true"
-  android:launchMode="singleTask">
-  <intent-filter>
-     <action android:name="android.intent.action.VIEW" />
-     <category android:name="android.intent.category.DEFAULT" />
-     <category android:name="android.intent.category.BROWSABLE" />
-     <data android:host="YOUR.APP.PACKAGE.ID" android:scheme="amzn" />
-  </intent-filter>
-</activity>
-<activity android:name="com.amazon.ags.html5.overlay.GameCircleAlertUserInterface"
-android:theme="@style/GCAlert" android:hardwareAccelerated="false"></activity>
-<receiver
-  android:name="com.amazon.identity.auth.device.authorization.PackageIntentReceiver"
-  android:enabled="true">
-  <intent-filter>
-     <action android:name="android.intent.action.PACKAGE_INSTALL" />
-     <action android:name="android.intent.action.PACKAGE_ADDED" />
-     <data android:scheme="package" />
-  </intent-filter>
-</receiver>
+  <activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface"
+      android:theme="@style/GCOverlay" android:hardwareAccelerated="false"></activity>
+  <activity
+    android:name="com.amazon.identity.auth.device.authorization.AuthorizationActivity"
+    android:theme="@android:style/Theme.NoDisplay"
+    android:allowTaskReparenting="true"
+    android:launchMode="singleTask">
+    <intent-filter>
+       <action android:name="android.intent.action.VIEW" />
+       <category android:name="android.intent.category.DEFAULT" />
+       <category android:name="android.intent.category.BROWSABLE" />
+       <data android:host="YOUR.APP.PACKAGE.ID" android:scheme="amzn" />
+    </intent-filter>
+  </activity>
+  <activity android:name="com.amazon.ags.html5.overlay.GameCircleAlertUserInterface"
+  android:theme="@style/GCAlert" android:hardwareAccelerated="false"></activity>
+  <receiver
+    android:name="com.amazon.identity.auth.device.authorization.PackageIntentReceiver"
+    android:enabled="true">
+    <intent-filter>
+       <action android:name="android.intent.action.PACKAGE_INSTALL" />
+       <action android:name="android.intent.action.PACKAGE_ADDED" />
+       <data android:scheme="package" />
+    </intent-filter>
+  </receiver>
 ```
 
 ##Developer
