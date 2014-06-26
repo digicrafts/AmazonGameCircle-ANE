@@ -27,7 +27,12 @@ public class AmazonGameCircle extends EventDispatcher {
     // private
     private static var allowInstance:Boolean=false;
     private static var extensionContext:ExtensionContext = null;
+    private static var mServiceReady:Boolean=false;
 
+
+    /**
+     *  Constructor
+     */
     public function AmazonGameCircle() {
 
         if(!allowInstance){
@@ -75,9 +80,21 @@ public class AmazonGameCircle extends EventDispatcher {
      *
      *
      */
+    public static function get serviceReady():Boolean
+    {
+        return mServiceReady;
+    }
+
+    /**
+     *
+     *
+     */
     public static function initialize(features:Array=null):void
     {
-        getInstance()._initialize();
+        if(!mServiceReady)
+            getInstance()._initialize();
+        else
+            _error(2);
     }
 
     /**
@@ -105,7 +122,10 @@ public class AmazonGameCircle extends EventDispatcher {
      */
     public static function submitScore(leaderboardId:String,score:int):void
     {
-        getInstance()._submitScore(leaderboardId,score);
+        if(mServiceReady)
+            getInstance()._submitScore(leaderboardId,score);
+        else
+            _error(1);
     }
     /**
      *
@@ -113,7 +133,10 @@ public class AmazonGameCircle extends EventDispatcher {
      */
     public static function showLeaderboard(leaderboardId:String):void
     {
-        getInstance()._showLeaderboard(leaderboardId);
+        if(mServiceReady)
+            getInstance()._showLeaderboard(leaderboardId);
+        else
+            _error(1);
     }
 
     /**
@@ -123,26 +146,54 @@ public class AmazonGameCircle extends EventDispatcher {
      */
     public static function updateAchievement(achievementId:String,progress:Number):void
     {
-        getInstance()._updateAchievement(achievementId,progress);
+        if(mServiceReady)
+            getInstance()._updateAchievement(achievementId,progress);
+        else
+            _error(1);
     }
     /**
      *
      */
     public static  function showAchievements():void
     {
-        getInstance()._showAchievements();
+        if(mServiceReady)
+            getInstance()._showAchievements();
+        else
+            _error(1);
+
     }
     /**
      *
      */
-    public static  function setPopUpLocation(location:String):void
+    public static function setPopUpLocation(location:String):void
     {
-        getInstance()._setPopUpLocation(location);
+        if(mServiceReady)
+            getInstance()._setPopUpLocation(location);
+        else
+            _error(1);
     }
 
 // Private Functions
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     *
+     * @param code
+     */
+    protected static function _error(code:int):void
+    {
+        var msg:String="error";
+        switch (code){
+            case 1:
+                msg="Service not ready!";
+                break;
+            case 2:
+                msg="Service already initialize!";
+                break;
+
+        }
+        trace("[AmazonGameCircle] error code:", code, "msg:", msg);
+    }
     /**
      *
      *
@@ -169,6 +220,7 @@ public class AmazonGameCircle extends EventDispatcher {
      */
     protected function _pause():void
     {
+        mServiceReady=false;
         if(extensionContext)
             extensionContext.call("pause");
     }
@@ -249,6 +301,7 @@ public class AmazonGameCircle extends EventDispatcher {
 
         switch (e.code) {
             case AmazonGameCircleEvent.SERVICE_READY:
+                mServiceReady=true;
             case AmazonGameCircleEvent.SERVICE_NOT_READY:
             case AmazonGameCircleEvent.SUBMIT_SCORE_COMPLETE:
             case AmazonGameCircleEvent.SUBMIT_SCORE_ERROR:

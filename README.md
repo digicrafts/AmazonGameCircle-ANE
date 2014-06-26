@@ -7,6 +7,12 @@ This AmazonGameCircle ANE add supprt to using Amazon Game Circle with Adobe Air.
 
 https://developer.amazon.com/public/apis/engage/gamecircle
 
+##Changelog
+
+1.0.1
+
+- add serviceReady to indicate the service is ready.
+
 ##Install the library
 
 Add the AmazonGameCircle-ANE library to your project.
@@ -146,6 +152,11 @@ Add the following settings in <application> tag. Remember to replace your "YOUR.
     </intent-filter>
   </receiver>
 ```
+
+##TODO
+
+-Allow initializing with different Games Feature
+-Supporting Whispersync
 
 ##Game we made using this ANE
 

@@ -96,7 +96,12 @@ public class AmazonGameCircleContext extends FREContext {
         EnumSet<AmazonGamesFeature> myGameFeatures = EnumSet.of(
                 AmazonGamesFeature.Achievements, AmazonGamesFeature.Leaderboards);
 
-        AmazonGamesClient.initialize(act, createCallback, myGameFeatures);
+        try{
+            AmazonGamesClient.initialize(act, createCallback, myGameFeatures);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
