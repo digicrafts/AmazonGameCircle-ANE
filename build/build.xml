@@ -96,6 +96,7 @@
             <arg line="-swc swc/${name}.swc"/>
             <arg line="-platform Android-ARM -platformoptions ../build/platform-android.xml -C android/ ."/>
             <arg line="-platform default -C default/ ."/>
+
         </exec>
 
         <move file="../temp/swc/${name}.swc" todir="../bin"/>

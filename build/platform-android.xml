@@ -1,7 +1,13 @@
-<platform xmlns="http://ns.adobe.com/air/extension/4.0">
+<platform xmlns="http://ns.adobe.com/air/extension/13.0">
     <packagedDependencies>
         <packagedDependency>AmazonInsights-android-sdk-2.1.26.jar</packagedDependency>
         <packagedDependency>gamecirclesdk.jar</packagedDependency>
         <packagedDependency>login-with-amazon-sdk.jar</packagedDependency>
     </packagedDependencies>
+    <packagedResources>
+        <packagedResource>
+            <packageName>com.amazon.ags.api</packageName>
+            <folderName>res</folderName>
+        </packagedResource>
+    </packagedResources>
 </platform>
