@@ -123,6 +123,12 @@ Update Your Application Descriptor
 
 You'll need to be using the AIR 4.0 SDK or higher, include the extension in your Application Descriptor XML, and update the Android Manifest Additions with some settings.
 
+Add the following settings before <application> tag.
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
 Add the following settings in <application> tag. Remember to replace your "YOUR.APP.PACKAGE.ID".
 
 ```xml
