@@ -3,6 +3,7 @@
         <packagedDependency>AmazonInsights-android-sdk-2.1.26.jar</packagedDependency>
         <packagedDependency>gamecirclesdk.jar</packagedDependency>
         <packagedDependency>login-with-amazon-sdk.jar</packagedDependency>
+        <packagedDependency>libAmazonGamesJni.so</packagedDependency>
     </packagedDependencies>
     <packagedResources>
         <packagedResource>
