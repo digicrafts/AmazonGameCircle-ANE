@@ -21,6 +21,8 @@ public class AmazonGameCircleExtension implements FREExtension {
 	public void initialize() {
 		// TODO Auto-generated method stub
 
+        // Load AGS JNI SDK
+        System.loadLibrary("libAmazonGamesJni");
 	}
 
 }

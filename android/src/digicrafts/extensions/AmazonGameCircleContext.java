@@ -112,6 +112,7 @@ public class AmazonGameCircleContext extends FREContext {
 
         if (_agsClient != null) {
             _agsClient.release();
+            _agsClient=null;
         }
 
     }
