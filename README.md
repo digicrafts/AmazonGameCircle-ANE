@@ -9,6 +9,15 @@ https://developer.amazon.com/public/apis/engage/gamecircle
 
 ##Changelog
 
+1.1.0
+
+- add methods for request leaderboards data.
+
+- add methods for request achievements data.
+
+- add showGameCircle(), showSignInPage()
+
+
 1.0.1
 
 - add serviceReady to indicate the service is ready.
@@ -162,6 +171,7 @@ Add the following settings in ```<application>``` tag. Remember to replace your 
 ##TODO
 
 -Allow initializing with different Games Feature
+
 -Supporting Whispersync
 
 ##Game we made using this ANE
