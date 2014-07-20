@@ -15,6 +15,7 @@ import com.amazon.ags.api.leaderboards.*;
 import com.amazon.ags.api.overlay.PopUpLocation;
 import com.amazon.ags.api.player.Player;
 import com.amazon.ags.api.player.PlayerClient;
+import com.amazon.ags.api.player.RequestFriendIdsResponse;
 import com.amazon.ags.api.player.RequestPlayerResponse;
 import com.amazon.ags.constants.LeaderboardFilter;
 import org.json.JSONArray;
@@ -95,7 +96,21 @@ public class AmazonGameCircleContext extends FREContext {
                 }
             });
 
+            //
+            methods.add(new AmazonGameCircleFunction<Void>("shutdown") {
+                public Void onCall(AmazonGameCircleContext context, Object[] args) {
+                    shutdown();
+                    return null;
+                }
+            });
+
             // player
+
+            methods.add(new AmazonGameCircleFunction<Boolean>("isSignedIn") {
+                public Boolean onCall(AmazonGameCircleContext context, Object[] args) {
+                    return isSignedIn();
+                }
+            });
 
             //
             methods.add(new AmazonGameCircleFunction<Void>("getLocalPlayer") {
@@ -545,7 +560,6 @@ public class AmazonGameCircleContext extends FREContext {
     }
 
 
-
     /**
      *
      */
@@ -569,8 +583,31 @@ public class AmazonGameCircleContext extends FREContext {
         }
     }
 
+    /**
+     *
+     */
+    public void shutdown() {
+
+        if(_agsClient==null){
+            _agsClient.shutdown();
+        }
+    }
+
 // Public Methods (Player)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     *
+     */
+    public Boolean isSignedIn() {
+
+        if(_agsClient==null) {
+            return false;
+        } else {
+
+            return _agsClient.getPlayerClient().isSignedIn();
+        }
+    }
 
     /**
      *
@@ -602,6 +639,66 @@ public class AmazonGameCircleContext extends FREContext {
         }
     }
 
+
+    /**
+     *
+     */
+    public void getFriendIds() {
+
+        if(_agsClient==null) {
+
+        } else {
+
+            PlayerClient lbClient = _agsClient.getPlayerClient();
+            AGResponseHandle<RequestFriendIdsResponse> handle = lbClient.getFriendIds();
+
+            // Optional callback to receive notification of success/failure.
+            handle.setCallback(new AGResponseCallback<RequestFriendIdsResponse>() {
+                @Override
+                public void onComplete(RequestFriendIdsResponse result) {
+                    if (result.isError()) {
+                        // Add optional error handling here.  Not strictly required
+                        // since retries and on-device request caching are automatic.
+                        dispatchStatusEventAsync("onGetFriendIdsError",result.toString());
+                    } else {
+
+                        // Continue game flow.
+//                        dispatchStatusEventAsync("onGetFriendIdsComplete", playerToJSON(result.getPlayer()).toString());
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     *
+     */
+//    public void getFriendIds() {
+//
+//        if(_agsClient==null) {
+//
+//        } else {
+//
+//            PlayerClient lbClient = _agsClient.getPlayerClient();
+//            AGResponseHandle<RequestFriendIdsResponse> handle = lbClient.getBatchFriends();
+//
+//            // Optional callback to receive notification of success/failure.
+//            handle.setCallback(new AGResponseCallback<RequestFriendIdsResponse>() {
+//                @Override
+//                public void onComplete(RequestFriendIdsResponse result) {
+//                    if (result.isError()) {
+//                        // Add optional error handling here.  Not strictly required
+//                        // since retries and on-device request caching are automatic.
+//                        dispatchStatusEventAsync("onGetFriendIdsError",result.toString());
+//                    } else {
+//
+//                        // Continue game flow.
+////                        dispatchStatusEventAsync("onGetFriendIdsComplete", playerToJSON(result.getPlayer()).toString());
+//                    }
+//                }
+//            });
+//        }
+//    }
 
 // Public Methods (Leaderboard)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////

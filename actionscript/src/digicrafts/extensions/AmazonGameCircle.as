@@ -160,6 +160,43 @@ public class AmazonGameCircle extends EventDispatcher {
             extensionContext.call("resume");
     }
 
+    /**
+     *
+     */
+    public static function shutdown():void
+    {
+        if(extensionContext)
+            extensionContext.call("shutdown");
+    }
+
+// Public Static Function (Player)
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /**
+     * Asynchronously returns the profile of the local player to the returned handle. An AUTHENTICATION_ERROR will be returned if the player is not authenticated, or the player is hidden.
+     */
+    public static function getLocalPlayer():void
+    {
+        if(mServiceReady&&extensionContext)
+            extensionContext.call("getLocalPlayer");
+        else
+            _error(1);
+    }
+
+
+    /**
+     * Returns a boolean value indicating whether the current player is signed in.
+     */
+    public static function isSignedIn():Boolean
+    {
+        if(mServiceReady&&extensionContext)
+            return extensionContext.call("isSignedIn");
+        else
+            return false;
+    }
+
+
 // Public Static Function (Leaderboard)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
