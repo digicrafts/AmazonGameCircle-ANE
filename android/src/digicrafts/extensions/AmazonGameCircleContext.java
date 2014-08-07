@@ -194,6 +194,13 @@ public class AmazonGameCircleContext extends FREContext {
 
             // Achievement
 
+            methods.add(new AmazonGameCircleFunction<Void>("updateAchievement",String.class,Double.class) {
+                public Void onCall(AmazonGameCircleContext context, Object[] args) {
+                    updateAchievement((String) args[0],((Double) args[1]).floatValue());
+                    return null;
+                }
+            });
+
             //
             methods.add(new AmazonGameCircleFunction<Void>("getAchievement",String.class) {
                 public Void onCall(AmazonGameCircleContext context, Object[] args) {
@@ -201,6 +208,8 @@ public class AmazonGameCircleContext extends FREContext {
                     return null;
                 }
             });
+
+            //
 
             //
             methods.add(new AmazonGameCircleFunction<Void>("getAchievements") {
