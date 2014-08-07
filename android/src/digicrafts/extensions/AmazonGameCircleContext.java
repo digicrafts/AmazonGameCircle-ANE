@@ -235,6 +235,23 @@ public class AmazonGameCircleContext extends FREContext {
                 }
             });
 
+            //
+            methods.add(new AmazonGameCircleFunction<Void>("showAchievements") {
+                public Void onCall(AmazonGameCircleContext context, Object[] args) {
+                    showAchievements();
+                    return null;
+                }
+            });
+
+            //
+            methods.add(new AmazonGameCircleFunction<Void>("setPopUpLocation",String.class) {
+                public Void onCall(AmazonGameCircleContext context, Object[] args) {
+                    setPopUpLocation((String) args[0]);
+                    return null;
+                }
+            });
+
+
 
         } catch (Exception e) {
 
