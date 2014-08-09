@@ -81,9 +81,8 @@ public class AmazonGameCircle extends EventDispatcher {
      */
     public static function isSupported():Boolean
     {
-        if(extensionContext)
-            return extensionContext.call("isSupported");
-        return false;
+        getInstance();
+        return (extensionContext!=null);
     }
 
     /**
